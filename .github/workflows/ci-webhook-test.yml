@@ -1,0 +1,30 @@
+name: CI Webhook Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      should_fail:
+        description: "Fail this run"
+        required: true
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+jobs:
+  webhook-test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print input
+        run: echo "should_fail=${{ inputs.should_fail }}"
+
+      - name: Conditionally fail
+        run: |
+          if [ "${{ inputs.should_fail }}" = "true" ]; then
+            echo "Failing on purpose"
+            exit 1
+          fi
+
+          echo "Succeeding on purpose"
+          exit 0
