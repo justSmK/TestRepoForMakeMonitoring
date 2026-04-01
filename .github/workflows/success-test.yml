@@ -1,0 +1,16 @@
+name: Success Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  always-success:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print start message
+        run: echo "Starting success workflow"
+
+      - name: Succeed
+        run: |
+          echo "This job will succeed"
+          exit 0
